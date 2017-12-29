@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name') Exercise:
+      input#name.form-control(type='text', placeholder='Exercise name' name='name' value=(undefined===exercise ? '' : exercise.name))
+    div.form-group  
+      label(for='muscleGroup') Muscle Group:
+      select#muscleGroup.form-control(type='select' placeholder='Select Muscle Group' name='muscleGroup' required='true')
+        for muscleGroup in muscleGroups
+          if muscleGroup
+            option(value=muscleGroup._id selected=(muscleGroup.name.toString()==muscleGroup._id.toString() ? 'selected' : false)) #{muscleGroup.name}
+          else
+            option(value=muscleGroup._id) #{muscleGroup.name}
+    div.form-group  
+      label(for='movementAngle') Movement Angle:
+      select#movementAngle.form-control(type='select' placeholder='Select Muscle Group' name='movementAngle' required='true')
+        for movementAngle in movementAngles
+          if movementAngle
+            option(value=movementAngle._id selected=(movementAngle.angle.toString()==movementAngle._id.toString() ? 'selected' : false)) #{movementAngle.angle}
+          else
+            option(value=movementAngle._id) #{movementAngle.angle}
+    div.form-group
+      label(for='difficulty') Difficulty:
+      select#difficulty.form-control(type='select' placeholder='Difficulty' name='difficulty')
+        option(value='Easy') Easy
+        option(value='Medium') Medium
+        option(value='Hard') Hard
+    div.form-group
+      label(for="comments") Comments:
+      input#comments.form-control(type='text', placeholder='Add comments' name='comments' value=(undefined===exercise ? '' : exercise.comments))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

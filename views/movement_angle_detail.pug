@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+  h1 #{movementAngle.angle}
+    h4 Comments:
+    p #{movementAngle.comments}
+    
+  hr
+  p
+    a(href=movementAngle.url+'/delete') Delete movement angle
+  p
+    a(href=movementAngle.url+'/update') Update movement angle

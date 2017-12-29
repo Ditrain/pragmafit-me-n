@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1 #{title}: #{movementAngle.name}
+    p Do you really want to delete this Angle?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#movementAngleid.form-control(type='hidden',name='movementAngleid', required='true', value=movementAngle._id )
+
+      button.btn.btn-primary(type='submit') Delete

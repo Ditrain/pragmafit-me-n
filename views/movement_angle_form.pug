@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='angle') Movement Angle:
+      input#angle.form-control(type='text', placeholder='Angle name' name='angle' value=(undefined===movementAngle ? '' : movementAngle.angle))
+      label(for="comments") Comments:
+      input#comment.form-control(type='text', placeholder='Add comments' name='comments' value=(undefined===movementAngle ? '' : movementAngle.comments))
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1 #{title}: #{muscleGroup.name}
+    p Do you really want to delete this Group?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#muscleGroupid.form-control(type='hidden',name='muscleGroupid', required='true', value=muscleGroup._id )
+
+      button.btn.btn-primary(type='submit') Delete

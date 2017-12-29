@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+  h1 #{equipment.name}
+    h4 Comments:
+    p #{equipment.comments}
+    
+  hr
+  p
+    a(href=equipment.url+'/delete') Delete equipment
+  p
+    a(href=equipment.url+'/update') Update equipment

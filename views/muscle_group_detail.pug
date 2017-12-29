@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+  h1 #{muscleGroup.name}
+    h4 Comments:
+    p #{muscleGroup.comments}
+
+  hr
+  p
+    a(href=muscleGroup.url+'/delete') Delete muscle group
+  p
+    a(href=muscleGroup.url+'/update') Update exercise

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+  each exercise in exerciseList
+    li 
+      a(href=exercise.url) #{exercise.name}- 
+      |
+      each group in exercise.muscleGroup
+        |#{group.name}
+
+  else
+    li There are no exercises.

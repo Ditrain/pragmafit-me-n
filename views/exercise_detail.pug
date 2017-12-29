@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+  h1 #{exercise.name}
+    h4 Muscle group:
+    each group in exercise.muscleGroup 
+      li #{group.name}
+    h4 Movement angle:
+    each moveAngle in exercise.movementAngle
+      li #{moveAngle.angle}
+    h4 Difficulty:
+    li #{exercise.difficulty}
+    h4 Comments:
+    li #{exercise.comments}
+
+  hr
+  p
+    a(href=exercise.url+'/delete') Delete exercise
+  p
+    a(href=exercise.url+'/update') Update exercise
+    

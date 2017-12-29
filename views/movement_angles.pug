@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+  each movementAngle in movementAngleList
+    li 
+      a(href=movementAngle.url) #{movementAngle.angle}
+  else
+    li There are no movement angles.
