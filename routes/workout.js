@@ -1,11 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 // Require controller modules
-var exerciseController = require('../controllers/exerciseController');
-var equipmentController = require('../controllers/equipmentController');
-var muscleGroupController = require('../controllers/muscleGroupController');
-var movementAngleController = require('../controllers/movementAngleController');
+const exerciseController = require('../controllers/exerciseController');
+const equipmentController = require('../controllers/equipmentController');
+const muscleGroupController = require('../controllers/muscleGroupController');
+const movementAngleController = require('../controllers/movementAngleController');
+const workoutSessionController = require('../controllers/workoutSessionController');
 
 /// EXERCISE ROUTES //
 
@@ -113,5 +114,31 @@ router.get('/movement-angle/:id', movementAngleController.movementAngleDetail);
 
 /* GET request for list of all MovementAngle. */
 router.get('/movement-angles', movementAngleController.movementAngleList);
+
+/// MOVEMENT ANGLE ROUTES ///
+
+/* GET request for creating a MovementAngle. NOTE This must come before route that displays MovementAngle (uses id) */
+router.get('/workout-session/create', workoutSessionController.workoutSessionCreateGet);
+
+/* POST request for creating MovementAngle. */
+router.post('/workout-session/create', workoutSessionController.workoutSessionCreatePost);
+
+/* GET request to delete MovementAngle. */
+router.get('/workout-session/:id/delete', workoutSessionController.workoutSessionDeleteGet);
+
+// POST request to delete MovementAngle
+router.post('/workout-session/:id/delete', workoutSessionController.workoutSessionDeletePost);
+
+/* GET request to update MovementAngle. */
+router.get('/workout-session/:id/update', workoutSessionController.workoutSessionUpdateGet);
+
+// POST request to update MovementAngle
+router.post('/workout-session/:id/update', workoutSessionController.workoutSessionUpdatePost);
+
+/* GET request for one MovementAngle. */
+router.get('/workout-session/:id', workoutSessionController.workoutSessionDetail);
+
+/* GET request for list of all MovementAngle. */
+router.get('/workout-sessions', workoutSessionController.workoutSessionList);
 
 module.exports = router;

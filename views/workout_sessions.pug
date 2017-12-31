@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+  each workoutSession in workoutSessionList
+    li 
+      a(href=workoutSession.url) #{workoutSession.date}
+      p - #{workoutSession.workoutType}
+      if workoutSession.comments
+        li #{workoutSession.comments}
+      //- |
+      //- each group in exercise.muscleGroup
+      //-   |#{group.name}
+
+  else
+    li There are no exercises.

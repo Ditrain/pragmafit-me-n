@@ -4,10 +4,6 @@ const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Exercise = require('./models/exercise');
-const Equipment = require('./models/equipment');
-const MovementAngle = require('./models/movement_angle');
-const MuscleGroup = require('./models/muscle_group');
 const logger = require('morgan');
 
 // routes
@@ -16,7 +12,7 @@ const users = require('./routes/users');
       //Import routes for "workout" area of site
 const workout = require('./routes/workout');
 
-      app = express();
+const app = express();
 
 //Set up default mongoose connection
 // const mongoDB = 'mongodb://127.0.0.1/me-n';

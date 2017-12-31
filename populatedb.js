@@ -226,4 +226,34 @@ function(err, results) {
 });
 
 
-
+{
+  date: today;
+  workoutType: 'Tabata';
+  circuit: [
+    {
+    round: [
+      {
+        exercise: bench,
+        equipment: barbell,
+        set: [
+          {reps: 21,weight: 135},
+          {reps: 15,weight: 135},
+          {reps: 9,weight: 135}
+        ]
+      },
+      {
+        exercise: sit-up,
+        equipment: air,
+        set: [
+          {reps: 42,weight: 0},
+          {reps: 30,weight: 0},
+          {reps: 18,weight: 0}
+        ]
+      }
+    ],
+    time: "10:30",    
+    circuitComments: "great round"
+    }
+  ];
+  sessionComments: "awesome workout";
+}

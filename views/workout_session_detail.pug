@@ -1,0 +1,28 @@
+extends layout
+
+block content
+
+  h1 #{workoutSession.workoutType}
+    h4 Exercise:
+    li #{workoutSession.exercise}
+    //- each exercises in exercise 
+    //-   li #{exercises.exercise }
+    h4 Equipment:
+    li #{workoutSession.equipment}
+    //- each equipment in workoutSession.equipment
+    //-   li #{workoutSession.equipment.name}
+    h4 Sets:
+    li #{workoutSession.sets}
+    h4 Reps:
+    li #{workoutSession.reps}
+    h4 Weight:
+    li #{workoutSession.weight}
+    h4 Comments:
+    li #{workoutSession.comments}
+
+  hr
+  p
+    a(href=workoutSession.url+'/delete') Delete workoutSession
+  p
+    a(href=workoutSession.url+'/update') Update workoutSession
+    
