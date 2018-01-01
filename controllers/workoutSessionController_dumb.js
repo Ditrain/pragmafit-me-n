@@ -11,9 +11,7 @@ exports.workoutSessionList = function(req, res, next) {
     .exec(function (err, listWorkoutSessions) {
       if (err) { return next(err); }
       //Successful, so render
-      res.render('workout_sessions', { 
-          title: 'Workout Session List', 
-          workoutSessionList: listWorkoutSessions });
+      res.render('workout_sessions', { title: 'Workout Session List', workoutSessionList: listWorkoutSessions });
     });
 };
 
@@ -40,10 +38,8 @@ exports.workoutSessionDetail = function(req, res, next) {
             return next(err);
     }
         // Successful, so render
-        res.render('workout_session_detail', { 
-            title: 'Workout Session Detail', 
-            workoutSession: results.workoutSession, 
-            exercise: results.exercise, equipment: results.equipment } );
+        res.render('workout_session_detail', { title: 'Workout Session Detail', 
+        workoutSession: results.workoutSession, exercise: results.exercise, equipment: results.equipment } );
     });
 };
 
@@ -53,15 +49,12 @@ exports.workoutSessionCreateGet = function(req, res, next) {
         exercises: function(callback) {
             Exercise.find(callback);
         },
-        equip: function(callback) {
+        equipments: function(callback) {
             Equipment.find(callback);
         },
     }, function(err, results) {
         if (err) { return next(err); }
-        res.render('workout_session_form', { 
-            title: 'Create Workout Session', 
-            exercises: results.exercises, 
-            equip: results.equip });
+        res.render('workout_session_form', { title: 'Create Workout Session', exercises: results.exercises, equipments: results.equipments });
     });
 };
 
@@ -81,39 +74,29 @@ exports.workoutSessionCreatePost = [
         var workoutSession = new WorkoutSession(
           { date: req.body.date,
             workoutType: req.body.workoutType,
-            circuit: [
-                {
-                    round: [{
-                        exercise: req.body.exercise,
-                        equipment: req.body.equipment,
-                        set: [{
-                            reps: req.body.reps,
-                            weight: req.body.weight
-                        }]
-                    }],
-                    circuitTime: req.body.circuitTime,    
-                    circuitComments: req.body.circuitComments
-                },
-                {
-                    round: [{
-                        exercise: req.body.exercise2,
-                        equipment: req.body.equipment2,
-                        set: [{
-                            reps: req.body.reps2,
-                            weight: req.body.weight2
-                        }]
-                    }],
-                    circuitTime: req.body.circuitTime2,    
-                    circuitComments: req.body.circuitComments2
-                }
-            ],            
-            sessionComments: req.body.sessionComments
-          });
+            exercise: req.body.exercise,
+            equipment: req.body.equipment,
+            reps: req.body.reps,
+            weight: req.body.weight,
+            time: req.body.time,    
+            comments: req.body.comments,    
+            exercise2: req.body.exercise2,
+            equipment2: req.body.equipment2,
+            reps2: req.body.reps2,
+            weight2: req.body.weight2,
+            time2: req.body.time2,    
+            comments2: req.body.comments2,
+            exercise3: req.body.exercise3,
+            equipment3: req.body.equipment3,
+            reps3: req.body.reps3,
+            weight3: req.body.weight3,
+            time3: req.body.time3,    
+            comments3: req.body.comments3
+          }
+        );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('workout_session_form', { 
-                title: 'Create Workout Session', 
-                workoutSession: workoutSession, errors: errors.array()});
+            res.render('workout_session_form', { title: 'Create Workout Session', workoutSession: workoutSession, errors: errors.array()});
         return;
         }
         else {
@@ -149,16 +132,13 @@ exports.workoutSessionDeleteGet = function(req, res, next) {
             err.status = 404;
             return next(err);
     }
-        res.render('workout_session_delete', { 
-            title: 'Delete WorkoutS ession', 
-            workoutSession: workoutSession });
+        res.render('workout_session_delete', { title: 'Delete WorkoutS ession', workoutSession: workoutSession });
     });
 };
 
 // Handle WorkoutSession delete on POST
 exports.workoutSessionDeletePost = function(req, res) {
-    WorkoutSession.findByIdAndRemove(req.body.workoutSessionid, 
-        function deleteWorkoutSession(err) {
+    WorkoutSession.findByIdAndRemove(req.body.workoutSessionid, function deleteWorkoutSession(err) {
         if (err) { return (err); }
         // Success - go to workoutSession list
         res.redirect('/workout/workout-sessions')
@@ -190,11 +170,7 @@ exports.workoutSessionUpdateGet = function(req, res, next) {
             err.status = 404;
             return next(err);
         }
-        res.render('workoutSession_form', { 
-            title: 'Update Workout Session', 
-            workoutSession: results.workoutSession, 
-            workoutSessions: results.workoutSessions, 
-            movementAngles: results.movementAngles });
+        res.render('workoutSession_form', { title: 'Update Workout Session', workoutSession: results.workoutSession, workoutSessions: results.workoutSessions, movementAngles: results.movementAngles });
     });
 };
 
@@ -238,18 +214,13 @@ exports.workoutSessionUpdatePost = [
             }, function(err, results) {
                 if (err) { return next(err); }
 
-                res.render('workout_session_form', { 
-                    title: 'Update Workout Session', 
-                    movementAngle: results.movementAngles, 
-                    workoutSession: results.workoutSessions, 
-                    workoutSession: workoutSession, errors: errors.array() });
+                res.render('workout_session_form', { title: 'Update Workout Session', movementAngle: results.movementAngles, workoutSession: results.workoutSessions, workoutSession: workoutSession, errors: errors.array() });
             });
             return;
         }
         else {
             // Data from form is valid. Update the record.
-            WorkoutSession.findByIdAndUpdate(req.params.id, 
-                workoutSession, {}, function (err,theworkoutSession) {
+            WorkoutSession.findByIdAndUpdate(req.params.id, workoutSession, {}, function (err,theworkoutSession) {
                 if (err) { return next(err); }
                    // Successful - redirect to workoutSession detail page.
                    res.redirect(theworkoutSession.url);

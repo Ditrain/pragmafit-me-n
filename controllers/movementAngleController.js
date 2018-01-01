@@ -8,7 +8,8 @@ exports.movementAngleList = function(req, res, next) {
       .exec(function (err, listMovementAngles) {
         if (err) { return next(err); }
         // Successful, so render
-          res.render('movement_angles', { title: 'Movement Angle List', movementAngleList: listMovementAngles } );
+          res.render('movement_angles', { 
+              title: 'Movement Angle List', movementAngleList: listMovementAngles } );
       });
 };
 
@@ -23,13 +24,15 @@ exports.movementAngleDetail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render
-        res.render('movement_angle_detail', { title: 'Movement Angle Detail', movementAngle: movementAngle } );
+        res.render('movement_angle_detail', { 
+            title: 'Movement Angle Detail', movementAngle: movementAngle } );
     });
 };
 
 // Display MovementAngle create FORM on GET
 exports.movementAngleCreateGet = function(req, res) {       
-    res.render('movement_angle_form', { title: 'Create Movement Angle' });
+    res.render('movement_angle_form', { 
+        title: 'Create Movement Angle' });
 };
 
 // Handle MovementAngle create on POST
@@ -51,7 +54,8 @@ exports.movementAngleCreatePost = [
         );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('movement_angle_form', { title: 'Create muscle group', movementAngle: movementAngle, errors: errors.array()});
+            res.render('movement_angle_form', { 
+                title: 'Create muscle group', movementAngle: movementAngle, errors: errors.array()});
         return;
         }
         else {
@@ -87,13 +91,15 @@ exports.movementAngleDeleteGet = function(req, res, next) {
             err.status = 404;
             return next(err);
     }
-        res.render('movement_angle_delete', { title: 'Delete Movement Angle', movementAngle: movementAngle });
+        res.render('movement_angle_delete', { 
+            title: 'Delete Movement Angle', movementAngle: movementAngle });
     });
 };
 
 // Handle MovementAngle delete on POST
 exports.movementAngleDeletePost = function(req, res) {
-    MovementAngle.findByIdAndRemove(req.body.movementAngleid, function deleteMovementAngle(err) {
+    MovementAngle.findByIdAndRemove(req.body.movementAngleid, 
+        function deleteMovementAngle(err) {
         if (err) { return (err); }
         // Success - go to movementAngle list
         res.redirect('/workout/movement-angles')
@@ -110,7 +116,8 @@ exports.movementAngleUpdateGet = function(req, res, next) {
             err.status = 404;
             return next(err);
     }
-    res.render('movement_angle_form', { title: 'Update MovementAngle', movementAngle: movementAngle });
+    res.render('movement_angle_form', { 
+        title: 'Update MovementAngle', movementAngle: movementAngle });
     });
 };
 
@@ -134,7 +141,9 @@ exports.movementAngleUpdatePost = [
         );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('movement_angle_form', { title: 'Update muscle group', movementAngle: movementAngle, errors: errors.array()});
+            res.render('movement_angle_form', { 
+                title: 'Update muscle group', 
+                movementAngle: movementAngle, errors: errors.array()});
         return;
         }
         else {

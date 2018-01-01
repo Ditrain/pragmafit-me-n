@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='workoutType') Workout Type:
+      select#workoutType.form-control(type='select' placeholder='Workout Type' name='workoutType')
+        option(value='Tabata') Tabata
+        option(value='Rounds in time') Rounds in time
+        option(value='Drop Reps') Drop Reps
+    div.form-group  
+      label(for='exercise') Exercise:
+      select#exercise.form-control(type='select' placeholder='Select exercise' name='exercise' required='true')
+        for exercise in exercises
+          option(value=exercise.name) #{exercise.name}
+      label(for='equipment') Equipment:
+      select#equipment.form-control(type='select' placeholder='Select Equipment' name='equipment' required='true')
+        for equipment in equipments
+          option(value=equipment.name) #{equipment.name}
+      label(for="reps") Reps:
+      input#weight.form-control(type='number', placeholder='Add reps' name='reps' value=(undefined===workoutSession ? '' : workoutSession.reps))
+      label(for="weight") Weight:
+      input#weight.form-control(type='number', placeholder='Add weight' name='weight' value=(undefined===workoutSession ? '' : workoutSession.weight))
+      label(for="time") Time:
+      input#comments.form-control(type='number', placeholder='Add comments' name='time' value=(undefined===workoutSession ? '' : workoutSession.time))
+      label(for="comments") Comments:
+      input#comments.form-control(type='text', placeholder='Add comments' name='comments' value=(undefined===workoutSession ? '' : workoutSession.comments))
+    div.form-group  
+      label(for='exercise') Exercise2:
+      select#exercise.form-control(type='select' placeholder='Select exercise' name='exercise' required='true')
+        for exercise in exercises
+          option(value=exercise) #{exercise.name}
+      label(for='equipment') Equipment2:
+      select#equipment.form-control(type='select' placeholder='Select Equipment' name='equipment' required='true')
+        for equipment in equipments
+          option(value=equipment) #{equipment.name}
+      label(for="reps") Reps2:
+      input#weight.form-control(type='number', placeholder='Add reps' name='reps2' value=(reps))
+      label(for="weight") Weight2:
+      input#weight.form-control(type='number', placeholder='Add weight' name='weight2' value=(weight))
+      label(for="time") Circuit time2:
+      input#comments.form-control(type='number', placeholder='Add time' name='time2' value=(time))
+      label(for="comments") Circuit Comments2:
+      input#comments.form-control(type='text', placeholder='Add comments' name='comments2' value=(comments))    
+
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

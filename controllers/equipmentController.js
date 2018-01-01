@@ -8,7 +8,8 @@ exports.equipmentList = function(req, res, next) {
     .exec(function (err, listEquipment) {
       if (err) { return next(err); }
       //Successful, so render
-      res.render('equipment', { title: 'Equipment List', equipmentList: listEquipment });
+      res.render('equipment', { 
+          title: 'Equipment List', equipmentList: listEquipment });
     });
 };
 
@@ -23,13 +24,15 @@ exports.equipmentDetail = function(req, res, next) {
                 return next(err);
         }
         // Successful, so render
-        res.render('equipment_detail', { title: 'Equipment Detail', equipment: equipment } );
+        res.render('equipment_detail', { 
+            title: 'Equipment Detail', equipment: equipment } );
     });
 };
 
 // Display Equipment create FORM on GET
 exports.equipmentCreateGet = function(req, res) {       
-    res.render('equipment_form', { title: 'Create Equipment' });
+    res.render('equipment_form', { 
+        title: 'Create Equipment' });
 };
 
 // Handle Equipment CREATE on POST
@@ -51,7 +54,9 @@ exports.equipmentCreatePost = [
         );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('equipment_form', { title: 'Create equipment', equipment: equipment, errors: errors.array()});
+            res.render('equipment_form', { 
+                title: 'Create equipment', 
+                equipment: equipment, errors: errors.array()});
         return;
         }
         else {
@@ -88,13 +93,15 @@ exports.equipmentDeleteGet = function(req, res, next) {
             err.status = 404;
             return next(err);
     }
-        res.render('equipment_delete', { title: 'Delete Equipment', equipment: equipment });
+        res.render('equipment_delete', { 
+            title: 'Delete Equipment', equipment: equipment });
     });
 };
 
 // Handle Equipment delete on POST
 exports.equipmentDeletePost = function(req, res) {
-    Equipment.findByIdAndRemove(req.body.equipmentid, function deleteEquipment(err) {
+    Equipment.findByIdAndRemove(req.body.equipmentid, 
+        function deleteEquipment(err) {
         if (err) { return (err); }
         // Success - go to equipment list
         res.redirect('/workout/equipment')
@@ -111,7 +118,8 @@ exports.equipmentUpdateGet = function(req, res, next) {
             err.status = 404;
             return next(err);
     }
-    res.render('equipment_form', { title: 'Update Equipment', equipment: equipment });
+    res.render('equipment_form', { 
+        title: 'Update Equipment', equipment: equipment });
     });
 };
 
@@ -135,7 +143,9 @@ exports.equipmentUpdatePost = [
         );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('equipment_form', { title: 'Update equipment', equipment: equipment, errors: errors.array()});
+            res.render('equipment_form', { 
+                title: 'Update equipment', equipment: equipment, 
+                errors: errors.array()});
         return;
         }
         else {

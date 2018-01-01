@@ -12,7 +12,8 @@ exports.exerciseList = function(req, res, next) {
     .exec(function (err, listExercises) {
       if (err) { return next(err); }
       //Successful, so render
-      res.render('exercises', { title: 'Exercise List', exerciseList: listExercises });
+      res.render('exercises', { 
+          title: 'Exercise List', exerciseList: listExercises });
     });
 };
 
@@ -29,7 +30,8 @@ exports.exerciseDetail = function(req, res, next) {
             return next(err);
     }
         // Successful, so render
-        res.render('exercise_detail', { title: 'Exercise Detail', exercise: exercise } );
+        res.render('exercise_detail', { 
+            title: 'Exercise Detail', exercise: exercise } );
     });
 };
 
@@ -44,7 +46,10 @@ exports.exerciseCreateGet = function(req, res, next) {
         },
     }, function(err, results) {
         if (err) { return next(err); }
-        res.render('exercise_form', { title: 'Create Exercise', muscleGroups: results.muscleGroups, movementAngles: results.movementAngles });
+        res.render('exercise_form', { 
+            title: 'Create Exercise', 
+            muscleGroups: results.muscleGroups, 
+            movementAngles: results.movementAngles });
     });
 };
 
@@ -72,7 +77,9 @@ exports.exerciseCreatePost = [
         );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('exercise_form', { title: 'Create muscle group', exercise: exercise, errors: errors.array()});
+            res.render('exercise_form', { 
+                title: 'Create muscle group', 
+                exercise: exercise, errors: errors.array()});
         return;
         }
         else {
@@ -108,13 +115,15 @@ exports.exerciseDeleteGet = function(req, res, next) {
             err.status = 404;
             return next(err);
     }
-        res.render('exercise_delete', { title: 'Delete Exercise', exercise: exercise });
+        res.render('exercise_delete', { 
+            title: 'Delete Exercise', exercise: exercise });
     });
 };
 
 // Handle Exercise delete on POST
 exports.exerciseDeletePost = function(req, res) {
-    Exercise.findByIdAndRemove(req.body.exerciseid, function deleteExercise(err) {
+    Exercise.findByIdAndRemove(req.body.exerciseid, 
+        function deleteExercise(err) {
         if (err) { return (err); }
         // Success - go to exercise list
         res.redirect('/workout/exercises')
@@ -143,7 +152,11 @@ exports.exerciseUpdateGet = function(req, res, next) {
             err.status = 404;
             return next(err);
         }
-        res.render('exercise_form', { title: 'Update Exercise', exercise: results.exercise, muscleGroups: results.muscleGroups, movementAngles: results.movementAngles });
+        res.render('exercise_form', { 
+            title: 'Update Exercise', 
+            exercise: results.exercise, 
+            muscleGroups: results.muscleGroups, 
+            movementAngles: results.movementAngles });
     });
 };
 
@@ -191,13 +204,18 @@ exports.exerciseUpdatePost = [
             }, function(err, results) {
                 if (err) { return next(err); }
 
-                res.render('exercise_form', { title: 'Update Exercise', movementAngle: results.movementAngles, muscleGroup: results.muscleGroups, exercise: exercise, errors: errors.array() });
+                res.render('exercise_form', { 
+                    title: 'Update Exercise', 
+                    movementAngle: results.movementAngles, 
+                    muscleGroup: results.muscleGroups, 
+                    exercise: exercise, errors: errors.array() });
             });
             return;
         }
         else {
             // Data from form is valid. Update the record.
-            Exercise.findByIdAndUpdate(req.params.id, exercise, {}, function (err,theexercise) {
+            Exercise.findByIdAndUpdate(req.params.id, exercise, {}, 
+                function (err,theexercise) {
                 if (err) { return next(err); }
                    // Successful - redirect to exercise detail page.
                    res.redirect(theexercise.url);

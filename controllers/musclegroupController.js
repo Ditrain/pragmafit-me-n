@@ -1,13 +1,15 @@
 const { body,validationResult } = require('express-validator/check'),
       { sanitizeBody } = require('express-validator/filter'),
       MuscleGroup = require('../models/muscle_group')
+
 // Display LIST of all MuscleGroups
 exports.muscleGroupList = function(req, res, next) {
     MuscleGroup.find()
       .exec(function (err, listMuscleGroups) {
         if (err) { return next(err); }
         // Successful, so render
-        res.render('muscle_groups', { title: 'Muscle Group List', muscleGroupList: listMuscleGroups });
+        res.render('muscle_groups', { 
+            title: 'Muscle Group List', muscleGroupList: listMuscleGroups });
       });
 };
 
@@ -22,7 +24,8 @@ exports.muscleGroupDetail = function(req, res, next) {
             return next(err);
         }
         // Successful, so render
-        res.render('muscle_group_detail', { title: 'MuscleGroup Detail', muscleGroup: muscleGroup } );
+        res.render('muscle_group_detail', { 
+            title: 'MuscleGroup Detail', muscleGroup: muscleGroup } );
     });
 };
 
@@ -50,7 +53,9 @@ exports.muscleGroupCreatePost = [
         );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('muscle_group_form', { title: 'Create muscle group', muscleGroup: muscleGroup, errors: errors.array()});
+            res.render('muscle_group_form', { 
+                title: 'Create muscle group', 
+                muscleGroup: muscleGroup, errors: errors.array()});
         return;
         }
         else {
@@ -86,13 +91,15 @@ exports.muscleGroupDeleteGet = function(req, res, next) {
             err.status = 404;
             return next(err);
     }
-        res.render('muscle_group_delete', { title: 'Delete Muscle Group', muscleGroup: muscleGroup });
+        res.render('muscle_group_delete', { 
+            title: 'Delete Muscle Group', muscleGroup: muscleGroup });
     });
 };
 
 // Handle MuscleGroup delete on POST
 exports.muscleGroupDeletePost = function(req, res) {
-    MuscleGroup.findByIdAndRemove(req.body.muscleGroupid, function deleteMuscleGroup(err) {
+    MuscleGroup.findByIdAndRemove(req.body.muscleGroupid, 
+        function deleteMuscleGroup(err) {
         if (err) { return (err); }
         // Success - go to muscleGroup list
         res.redirect('/workout/muscle-groups')
@@ -109,7 +116,8 @@ exports.muscleGroupUpdateGet = function(req, res, next) {
             err.status = 404;
             return next(err);
     }
-    res.render('muscle_group_form', { title: 'Update Muscle Group', muscleGroup: muscleGroup });
+    res.render('muscle_group_form', { 
+        title: 'Update Muscle Group', muscleGroup: muscleGroup });
     });
 };
 
@@ -133,7 +141,9 @@ exports.muscleGroupUpdatePost = [
         );
         if (!errors.isEmpty()) {
             // There are errors. Render the form again with sanitized values/error messages.
-            res.render('muscle_group_form', { title: 'Update muscle group', muscleGroup: muscleGroup, errors: errors.array()});
+            res.render('muscle_group_form', { 
+                title: 'Update muscle group', 
+                muscleGroup: muscleGroup, errors: errors.array()});
         return;
         }
         else {
