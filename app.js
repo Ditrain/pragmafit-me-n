@@ -16,7 +16,6 @@ const app = express();
 
 //Set up default mongoose connection
 // const mongoDB = 'mongodb://127.0.0.1/me-n';
-const mongoDB = 'mongodb://ditrain:dagMLAB!108610@ds131687.mlab.com:31687/me-n-v1';
 mongoose.connect(mongoDB, {
   useMongoClient: true
 });
